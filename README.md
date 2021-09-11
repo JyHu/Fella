@@ -8,12 +8,12 @@
 
 ## 查看帮助
 
-- [0x01 Fella初步介绍](0x01-Fella-Instructions/0x01-Fella-Instructions.md)
-- [0x02 启动app 新建项目](0x02-Fella-Startup/0x02-Fella-Startup.md)
-- [0x03 Fella功能模块简介](0x03-Fella-Summary/0x03-Fella-Summary.md)
-- [0x04 Fella内容区及右键菜单说明](0x04-Fella-Content/0x04-Fella-Content.md)
-- [0x05 Fella内容编辑区](0x05-Fella-Editer/0x05-Fella-Editer.md)
-- [0x06 Fella 工具](0x06-Fella-Tools/0x06-Fella-Tools.md)
-- [0x07 简单脚本交互](0x07-Fella-Javascript/0x07-Fella-Javascript.md)
-- [0x08 Preferences](0x08-Fella-Preferences/0x08-Fella-Preferences.md)
+- [0x01 Fella初步介绍](Documents/0x01-Fella-Instructions/0x01-Fella-Instructions.md)
+- [0x02 启动app 新建项目](Documents/0x02-Fella-Startup/0x02-Fella-Startup.md)
+- [0x03 Fella功能模块简介](Documents/0x03-Fella-Summary/0x03-Fella-Summary.md)
+- [0x04 Fella内容区及右键菜单说明](Documents/0x04-Fella-Content/0x04-Fella-Content.md)
+- [0x05 Fella内容编辑区](Documents/0x05-Fella-Editer/0x05-Fella-Editer.md)
+- [0x06 Fella 工具](Documents/0x06-Fella-Tools/0x06-Fella-Tools.md)
+- [0x07 简单脚本交互](Documents/0x07-Fella-Javascript/0x07-Fella-Javascript.md)
+- [0x08 Preferences](Documents/0x08-Fella-Preferences/0x08-Fella-Preferences.md)
 
