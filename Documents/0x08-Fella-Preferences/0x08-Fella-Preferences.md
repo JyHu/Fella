@@ -1,3 +1,5 @@
+# Preferences 便好设置
+
 ![](Fella_cover_preferences.png)
 
 跟所有app一样，Fella也有一个系统便好设置的页面，所有的设置内容会全局生效。
