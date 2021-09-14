@@ -13,7 +13,7 @@
 - [0x03 Fella功能模块简介](Documents/0x03-Fella-Summary/0x03-Fella-Summary.md)
 - [0x04 Fella内容区及右键菜单说明](Documents/0x04-Fella-Content/0x04-Fella-Content.md)
 - [0x05 Fella内容编辑区](Documents/0x05-Fella-Editer/0x05-Fella-Editer.md)
-- [0x06 Fella 工具(快捷键)](Documents/0x06-Fella-Tools/0x06-Fella-Shortcuts.md)
+- [0x06 Fella 工具(快捷键)](Documents/0x06-Fella-Shortcuts/0x06-Fella-Shortcuts.md)
 - [0x07 简单脚本交互](Documents/0x07-Fella-Javascript/0x07-Fella-Javascript.md)
 - [0x08 Preferences](Documents/0x08-Fella-Preferences/0x08-Fella-Preferences.md)
 
