@@ -1,0 +1,850 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>绕线画-隐私声明</title>
+    <url>/Diagram/0x00_diagram_privacy/</url>
+    <content><![CDATA[<p>绕线画尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的服务，我们会按照本隐私权政策的规定使用和披露您的个人信息，但将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下 ，我们不会将这些信息对外披露或向第三方提供。我们会不时更新本隐私权政策 。 您在同意绕线画服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于绕线画服务使用协议不可分割的一部分。</p>
+<ol>
+<li><p>绕线画会收集您的哪些信息<br>绕线画是一款本地创意辅助类工具软件，只会读取您选择的文件并使用。</p>
+</li>
+<li><p>信息使用<br>a) 首先，我们支持您快速导入其他用户共享的文件，所以需要您主动的选择对应的文件；<br>b) 我们会把您选择的文件跟本地的图形数据合并并缓存到本地；<br>c) 释放选择文件的读取权限，后续不再对您选择的文件保持读取权限。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Diagram</category>
+      </categories>
+      <tags>
+        <tag>隐私声明</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x08 Preferences</title>
+    <url>/Fella/0x08_fella_preferences/</url>
+    <content><![CDATA[<p>跟所有app一样，Fella也有一个系统便好设置的页面，所有的设置内容会全局生效。</p>
+<span id="more"></span>
+
+<p>主要内容都在基本设置里，如图所示。</p>
+<h4 id="1-选择语言"><a href="#1-选择语言" class="headerlink" title="1. 选择语言"></a>1. 选择语言</h4><p>用于选取您习惯使用的语言，暂时支持<strong>简体中文</strong>、<strong>繁体中文</strong>、<strong>英文</strong>、<strong>日语</strong>、<strong>德语</strong>，后续还会支持更多语言种类，所有内容翻译与支持均来自于各类翻译平台🙏。</p>
+<h4 id="2-外观"><a href="#2-外观" class="headerlink" title="2. 外观"></a>2. 外观</h4><p>跟macOS系统便好设置的外观一样，支持<strong>浅色</strong>、<strong>深色</strong>、<strong>跟随系统</strong>，选择之后即可生效。</p>
+<h4 id="3-始终在前"><a href="#3-始终在前" class="headerlink" title="3. 始终在前"></a>3. 始终在前</h4><p>会把Fella的所有窗口置顶显示。</p>
+<h4 id="4-字符串标识合理检测"><a href="#4-字符串标识合理检测" class="headerlink" title="4. 字符串标识合理检测"></a>4. 字符串标识合理检测</h4><p>字符串标识合理检测是指在修改、新建一个多语言字符串时，在保存的时候对字符串标识做合理性检测。<br>这里的合理指的是是否只包含**<code>字母</code><strong>、</strong><code>数字</code><strong>、</strong><code>._ -</code>**等字符，这些以外的内容都会判断为无效。<br>使用字符串检测功能可以让您的项目风格尽量的保持统一，避免无效字符导致的内容解析失败。</p>
+<h4 id="5-自动保存"><a href="#5-自动保存" class="headerlink" title="5. 自动保存"></a>5. 自动保存</h4><p>开启自动保存，可以在编辑多语言字符串、分组时自动为您保存变动的内容。需要注意的是，自动保存，只对内容编辑有效。</p>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x07 简单脚本交互</title>
+    <url>/Fella/0x07_fella_scripts/</url>
+    <content><![CDATA[<p>在Fella中，提供了一些简单的JS脚本交互支持，用于方便您的数据导入和文本翻译等，这一章内容，我会做一个简单的说明。</p>
+<span id="more"></span>
+
+<p>Fella目前提供了两个简单方法供JS调用，Fella在加载JS脚本代码的时候会向JS中注入一个<code>Fella</code>对象，您可以通过该对象来调用原生方法：</p>
+<pre><code>/// 在JS中调用Fella发起网络请求，请求结果会同时把所有参数一并带回
+/// - Parameters:
+///   - urlString: 请求地址
+///   - params: 参数
+///   - method: 方法
+///   - headers: 请求头
+///   - verification: 校验内容
+///   - callback: 回调函数，在Fella请求到结果后，会调用这个JS函数把结果回传给JS
+func request(_ urlString: String,
+             _ params: [String: Any]?,
+             _ method: String,
+             _ headers: [String: String]?,
+             _ verification: Any?,
+             _ callback: String)
+
+/// JS显示调试日志
+/// - Parameter log: 调试日志
+func showLog(_ log: Any)
+</code></pre>
+<h2 id="1-翻译脚本"><a href="#1-翻译脚本" class="headerlink" title="1. 翻译脚本"></a>1. 翻译脚本</h2><p>用于在编辑字符串时快速的对输入文案做翻译，这里用到了Javascript脚本语言。</p>
+<p><strong>1</strong> 在JS中添加一个翻译方法：</p>
+<pre><code>// s 需要翻译的内容
+// t 需要翻译到的语言
+// v 用来校验的返回参数
+function translate(s,t,v)
+</code></pre>
+<p>在点击翻译按钮时，Fella内部会调用JS中的<code>translate</code>方法，JS内可以根据自己的习惯或者用到的开放API执行翻译。</p>
+<p><strong>2</strong> 请求Fella翻译接口，调用方法如：</p>
+<pre><code>Fella.request(u,p,m,h,v,c)
+</code></pre>
+<p><strong>3</strong> 通过callback回传请求结果，内容包含发起请求时的各种参数，格式如下:</p>
+<pre><code>&#123;
+    &quot;method&quot;: xxx,
+    &quot;verification&quot;:,
+    &quot;params&quot;: xxx,
+    &quot;headers&quot;: xxx,
+    &quot;success&quot;: xxx,
+    &quot;error&quot;: xxx
+&#125;
+</code></pre>
+<p><strong>4</strong> 在JS脚本中接收到请求结果并解析后，将解析内容返回给Fella：</p>
+<pre><code>/// 回调结果方法
+/// - Parameters:
+///   - result: 翻译结果
+///   - language: 语言
+///   - verification: 校验内容
+func translateResult(_ result: String, _ language: String, _ verification: Any)
+</code></pre>
+<p><strong>5</strong> 这里是一个我使用**<a href="https://fanyi-api.baidu.com/product/153">百度翻译开放API</a>**实现的例子：</p>
+<pre><code>var MD5 = function (string) // 百度SDK里提供的MD5算法
+
+function translate(s,t,v) &#123;
+    Fella.showLog(&quot;begin request&quot;);
+
+    var appid = &#39;你申请的appid&#39;;
+    var key = &#39;你申请的key&#39;;
+    var salt = (new Date).getTime();
+    var query = s;
+    var sign = MD5(appid + query + salt +key);
+    
+    Fella.request(&#39;https://fanyi-api.baidu.com/api/trans/vip/translate&#39;,
+                &#123;
+                    q: query,
+                    appid: appid,
+                    salt: salt,
+                    from: &quot;auto&quot;,
+                    to: t,
+                    sign: sign
+                &#125;,
+                &quot;get&quot;,
+                null,
+                v,
+                &quot;parse&quot;)
+&#125;
+
+function parse(res) &#123;
+    var r = res[&quot;success&quot;][&quot;trans_result&quot;][0][&quot;dst&quot;]
+    var l = res[&quot;params&quot;][&quot;to&quot;]
+    var v = res[&quot;verification&quot;]
+    Fella.showLog(res)
+    Fella.translateResult(r, l, v)
+&#125;
+</code></pre>
+<h2 id="2-内容导入JS"><a href="#2-内容导入JS" class="headerlink" title="2. 内容导入JS"></a>2. 内容导入JS</h2><p>使用Javascript脚本语言提供给使用者自定义导入本地化资源的方式。</p>
+<p><strong>1.</strong> 在JS中添加一个方法，由Fella调用：</p>
+<pre><code>function importI18ns()
+</code></pre>
+<p><strong>2.</strong> Fella中提供了额外的以下几个方法：</p>
+<pre><code>/// 更新本地化内容
+/// - Parameters:
+///   - i18nJson: 本地化内容的json内容
+///   - fileName: 文件名的相对路径，在Fella中切换文件的地方显示在文件名后
+func update(_ i18nJson: [String: Any], _ fileName: String)
+    
+/// 获取本地i18nString内容
+/// - Parameters:
+///   - identifier: 字符串标识
+///   - fileName: 文件名的相对路径，在Fella中切换文件的地方显示在文件名后
+///   - callback: 回调方法
+func i18nString(_ identifier: String, _ fileName: String, _ callback: String)
+    
+/// 刷新字符串列表，在所有数据遍历结束后调用
+func reloadI18nList()
+</code></pre>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x06 Fella 快捷键</title>
+    <url>/Fella/0x06_fella_shortcuts/</url>
+    <content><![CDATA[<p>在Fella中为用户另外提供了一些快捷开发、安全校验等辅助工具，入口在顶部菜单中。</p>
+<span id="more"></span>
+
+<h2 id="1-文件"><a href="#1-文件" class="headerlink" title="1. 文件"></a>1. 文件</h2><p><img src="/Fella/0x06_fella_shortcuts/shortcuts-file.png"></p>
+<h3 id="1-1-新建字符串"><a href="#1-1-新建字符串" class="headerlink" title="1.1 新建字符串"></a>1.1 新建字符串</h3><p>用于新建一个字符串，如果侧边栏是在隐藏状态，会主动的显示出来。</p>
+<h3 id="1-2-新建项目"><a href="#1-2-新建项目" class="headerlink" title="1.2 新建项目"></a>1.2 新建项目</h3><p>从新开始创建一个Fella项目。</p>
+<h3 id="1-3-导出"><a href="#1-3-导出" class="headerlink" title="1.3 导出"></a>1.3 导出</h3><p>用于将Fella资源按顺序整齐的输出到您的Xcode项目中。</p>
+<p>需要注意的是，为了避免频繁的IO操作，您的每次编辑、修改等操作，只会影响Fella内的数据状态，并不会马上同步到Xcode项目中，需要您主动的来执行导出操作。</p>
+<p>在这里提供了多种导出目标，当然最主要的还是导出到Xcode项目中，在执行导出操作的时候需要您选择一个您所熟悉的语言，用于备注其他您不熟悉的语种，比如在我的项目中有这样一个日语字符串：</p>
+<pre><code>&quot;com.auu.localization.allChangedStringsName&quot; = &quot;すべての変更されたコンテンツ&quot;;
+</code></pre>
+<p>我是完全看不懂啊😭，所以我就需要有个我熟悉的简体中文在注释里，就像这样：</p>
+<pre><code>// Tags: 1.0
+// 全部有改动的内容
+&quot;com.auu.localization.allChangedStringsName&quot; = &quot;すべての変更されたコンテンツ&quot;;
+</code></pre>
+<p>在导出的时候我会针对所有常量内容、各种语言内容都会加上这种语言内容的注释，方便您的查看。</p>
+<p>在这里我还提供了其他几种的导出到外部的方式，您可以在使用中去尝试着看一下。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>导出到项目</td>
+<td></td>
+<td>将Fella内容以选中的语言导出到项目中。</td>
+</tr>
+<tr>
+<td>导出为…</td>
+<td>command + shift + E</td>
+<td>将Fella内容以选中的格式导出到其他地方，支持<code>CSV</code>、<code>JSON</code>、<code>plist</code>格式。</td>
+</tr>
+<tr>
+<td>快捷导出</td>
+<td>command + E</td>
+<td>在选择好导出语言后，可以用来快捷导出Fella内容到项目中，同时会在主页面右上角显示快捷导出的按钮</td>
+</tr>
+<tr>
+<td>设置快捷导出语言</td>
+<td></td>
+<td>用于选择快速导出的语言，设置了之后会记在Strings文件中。</td>
+</tr>
+</tbody></table>
+<h3 id="1-4-导入"><a href="#1-4-导入" class="headerlink" title="1.4 导入"></a>1.4 导入</h3><p>用于批量的将外部资源导入到Fella中来统一管理，这里暂时提供了两种方式：</p>
+<h4 id="1-4-1-JS脚本导入"><a href="#1-4-1-JS脚本导入" class="headerlink" title="1.4.1 JS脚本导入"></a>1.4.1 JS脚本导入</h4><p>Fella支持一些简单的JS交互，可以提供给您导入线上的资源进来。</p>
+<h4 id="1-4-2-CSV文件导入"><a href="#1-4-2-CSV文件导入" class="headerlink" title="1.4.2 CSV文件导入"></a>1.4.2 CSV文件导入</h4><p><img src="/Fella/0x06_fella_shortcuts/tools-import-csv.png"></p>
+<p>用于将CSV中的资源导入到Fella中，这个小工具也挺简单的，点击加号选择需要导入的CSV文件后，依次选择各内容项匹配的CSV中的数据列，然后选择Strings文件开始比较即可。</p>
+<p>比较之后会提示您有多少变动的内容和未导入到项目中的内容，最后根据需求选择对应的操作按钮即可一步同步。</p>
+<h3 id="1-5-保存"><a href="#1-5-保存" class="headerlink" title="1.5 保存"></a>1.5 保存</h3><ul>
+<li>如果当前是在做字符串、分组内容的新建或者编辑的话，会保存当前编辑内容</li>
+<li>保存Fella项目到本地的<code>i18nproj</code>文件中</li>
+</ul>
+<h2 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h2><p><img src="/Fella/0x06_fella_shortcuts/shortcut-actions.png"></p>
+<h3 id="2-1-查漏"><a href="#2-1-查漏" class="headerlink" title="2.1 查漏"></a>2.1 查漏</h3><p>用于查找项目中所有未本地化的字符串内容。</p>
+<p>左边是各种参数设置和编辑区域；</p>
+<p>右侧为选中代码文件的源代码，代码上面显示的是当前代码文件的相对路径，可以直接点击“打开”来定位到Xcode项目代码文件；</p>
+<p>在页面的底部为各种数据切换功能区，用于在搜索结果中切换自己需要处理的内容。</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数设置</th>
+<th align="center">字符串列表</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/Fella/0x06_fella_shortcuts/tools-filter-settings.png"></td>
+<td align="center"><img src="/Fella/0x06_fella_shortcuts/tools-filter-strings.png"></td>
+</tr>
+</tbody></table>
+<h4 id="2-1-1-参数设置"><a href="#2-1-1-参数设置" class="headerlink" title="2.1.1 参数设置"></a>2.1.1 参数设置</h4><p>用于设置搜索项目中未本地化字符串的各种参数。</p>
+<ul>
+<li><p>首先是一个正则表达式的编辑框，用于在遍历所有项目文件时匹配字符串用，需要注意的是，其中正则匹配结果分组一的内容为未本地化的字符串内容。</p>
+</li>
+<li><p>然后是一个语言选择按钮，用于在找到未本地化内容的时候，跟Fella里保存的对应语言的内容做比较，来确定该字符串是否已经做了本地化。</p>
+</li>
+<li><p>旁边是一个设置按钮，用于设置项目中实现本地化的方法，如果做了本地化处理的话，肯定会使用本地化的方法，如<code>NSLocalizedString(&quot;com.auu.localization.test.animals.sharkNameKey&quot;, comment: &quot;鲨鱼&quot;)</code>，或者其他自定义的方法，如果找到的内容没有被本地化方法包含，只是单纯的字符串，那么肯定需要处理。</p>
+</li>
+</ul>
+<p>在所有参数都设置好了后，就可以选择搜索按钮，执行未本地化内容的搜索操作，在搜索到结果后，会自动的切换到右边的字符串tab，显示搜索的结果。</p>
+<h4 id="2-1-2-字符串列表"><a href="#2-1-2-字符串列表" class="headerlink" title="2.1.2 字符串列表"></a>2.1.2 字符串列表</h4><p><strong>1) 字符串列表</strong></p>
+<p>显示搜索到的所有未本地化的字符串列表内容，右下角会显示有多少条未本地化的内容，由于是模糊匹配，所有搜索结果可能会有偏差。</p>
+<p>您可以选择需要处理的字符串来查看其他对应的详细信息。您也可以直接在底部选择“上一个”、“下一个”字符串来切换选中内容。</p>
+<p><strong>2) 字符串编辑区</strong></p>
+<p>当您选择某条内容后，这里会显示对应的各种信息。</p>
+<ul>
+<li><strong>字符串</strong>，您选择的字符串内容</li>
+<li><strong>包含于</strong>，在搜索匹配的时候，搜索到的当前字符串所在的文件，如果想要添加到别的文件里，也可以自己切换</li>
+<li><strong>字符串标识符</strong>，如果在本地存在对应的本地化字符串的话，会显示对应的内容，如果没有，则用于输入新编辑的内容</li>
+<li><strong>字符串常量</strong>，同字符串标识符一样</li>
+<li>插入按钮，用于在编辑完所有内容后，把选中的字符串信息保存到Fella里</li>
+<li>文件列表，用于显示包含当前选中字符串的所有文件，在某个文件被选中后，会在右侧代码区显示对应的代码源文件。</li>
+</ul>
+<h4 id="2-1-3-代码区"><a href="#2-1-3-代码区" class="headerlink" title="2.1.3 代码区"></a>2.1.3 代码区</h4><p>在您选定代码文件后，会在这里显示对应的代码源文件，而对于未本地化的字符串会高亮显示，如果您在左侧内容编辑区插入了对应的本地化字符串，那么您可以直接点击代码中高亮的部分，一步完成代码文件中的内容修改替换。</p>
+<h3 id="2-2-翻译"><a href="#2-2-翻译" class="headerlink" title="2.2 翻译"></a>2.2 翻译</h3><p>用于在编辑字符串时快速的对输入文案做翻译，这里的脚本语言是为了字符串编辑区用的，这里用到了Javascript脚本语言。</p>
+<h3 id="2-3-常量修复"><a href="#2-3-常量修复" class="headerlink" title="2.3 常量修复"></a>2.3 常量修复</h3><p>用于修复使用了常量的项目，在代码中却没有使用常量的问题，在您选择了这个工具后，我会遍历您所选择的Xcode项目中的所有代码文件，匹配并处理所有使用内容。</p>
+<p>比如您的项目有这样一个常量：</p>
+<pre><code>// 相似内容
+let lSimilarContentsNameKey = &quot;com.auu.localization.similarContentsNameKey&quot;
+</code></pre>
+<p>但是在代码中却是这样用的:</p>
+<pre><code>NSLocalizedString(&quot;com.auu.localization.similarContentsNameKey&quot;, comment: &quot;comment&quot;)
+</code></pre>
+<p>那么在您选择这个工具后，在遍历到这行代码后给替换成使用常量的模式：</p>
+<pre><code>NSLocalizedString(lSimilarContentsNameKey, comment: &quot;comment&quot;)
+</code></pre>
+<h3 id="2-4-使用文件覆盖"><a href="#2-4-使用文件覆盖" class="headerlink" title="2.4 使用文件覆盖"></a>2.4 使用文件覆盖</h3><p>这是一个很小众的功能，用于将选中的Strings文件内容覆盖掉当前Strings内容。</p>
+<h3 id="2-5-删除当前选中文件"><a href="#2-5-删除当前选中文件" class="headerlink" title="2.5 删除当前选中文件"></a>2.5 删除当前选中文件</h3><p>直接将当前文件所对应的资源从Fella中删除，同时，我也会在您的Xcode项目资源中查找对应的各语言下的Strings文件然后删除掉。</p>
+<h3 id="2-6-文件比较"><a href="#2-6-文件比较" class="headerlink" title="2.6 文件比较"></a>2.6 文件比较</h3><p><img src="/Fella/0x06_fella_shortcuts/tools-compare.png"></p>
+<p>用于比较两个Strings文件内容，显示互相之间都有的和缺失的内容，当您选择了字符串内容后，会在右边显示完整的信息，您也可以在这里把选择的内容复制到您需要的文件中。</p>
+<h3 id="2-7-调整数据保存方式"><a href="#2-7-调整数据保存方式" class="headerlink" title="2.7 调整数据保存方式"></a>2.7 调整数据保存方式</h3><p>跟新建项目时的操作一样，修改完保存方式后，我会把另一种方式产生的数据给删除掉，然后按新的数据格式重新生成缓存内容。</p>
+<h3 id="2-8-切换strings文件"><a href="#2-8-切换strings文件" class="headerlink" title="2.8 切换strings文件"></a>2.8 切换strings文件</h3><p>执行在主页面显示的strings文件中依次切换的操作。</p>
+<h3 id="2-9-Go-Project"><a href="#2-9-Go-Project" class="headerlink" title="2.9 Go Project"></a>2.9 Go Project</h3><p>打开项目所在目录，如果没有则会跳转无效。</p>
+<h3 id="2-10-设置"><a href="#2-10-设置" class="headerlink" title="2.10 设置"></a>2.10 设置</h3><p>就跟初始使用新建项目时的操作一样，用于选择各语言文件对应的常量文件和筛选设置。</p>
+<h3 id="2-11-搜索"><a href="#2-11-搜索" class="headerlink" title="2.11 搜索"></a>2.11 搜索</h3><p>执行再次搜索项目资源的操作，跟初始使用时的逻辑类似，这个适用于在使用中修改了设置项后，或者修改了Xcode项目本地信息后，重新搜索本地资源。</p>
+<p>需要注意的是，每次搜索都会以Xcode项目本地资源为主，如果您在当前使用中有内容改动，会被本地资源覆盖掉，所以，如果是非必需情况的话，不要经常执行搜索操作。</p>
+<h2 id="3-视图"><a href="#3-视图" class="headerlink" title="3. 视图"></a>3. 视图</h2><p><img src="/Fella/0x06_fella_shortcuts/shortcut-view.png"></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>显示编辑页面</td>
+<td><code>command + K</code></td>
+<td>显示主页面右边的内容新建、编辑模块</td>
+</tr>
+<tr>
+<td>显示操作日志</td>
+<td><code>command + L</code></td>
+<td>显示主页面底部的日志模块</td>
+</tr>
+<tr>
+<td>显示快捷键</td>
+<td>`command + \``</td>
+<td>显示快捷键列表页面</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x05 Fella内容编辑区</title>
+    <url>/Fella/0x05_fella_editor/</url>
+    <content><![CDATA[<p>Fella的内容编辑区用于展示、编辑本地化字符串和分组，在您有不同的选择的时候会有不同的展示内容和样式。</p>
+<span id="more"></span>
+
+<h2 id="1-查看模式"><a href="#1-查看模式" class="headerlink" title="1. 查看模式"></a>1. 查看模式</h2><table>
+<thead>
+<tr>
+<th>当您在左侧内容区选择多行字符串内容时，内容编辑区会显示为查看模式，这里会显示您选择的所有字符串的所有内容信息。<br><br>当然，您也可以在该区域右键筛选您所想要查看的内容，您所做的筛选类别只对当前使用过程生效，且对所有文件生效。</th>
+<th><img src="/Fella/0x05_fella_editor/editer-visible-type.jpg"></th>
+</tr>
+</thead>
+</table>
+<h2 id="2-分组"><a href="#2-分组" class="headerlink" title="2. 分组"></a>2. 分组</h2><table>
+<thead>
+<tr>
+<th>因为对于分组的操作比较简单，所以先说。<br><br>当您选择一个分组的时候，该区域会显示为对于分组的查看和编辑模式，您可以对该分组的信息做需要的编辑。<br>需要注意的是，分组ID是自动生成的，无法编辑，系统默认分组的信息也无法被编辑。<br><br> 对于新建分组来说，跟编辑一个自定分组是一样的，在编辑完内容后记得都要主动保存一下。</th>
+<th><img src="/Fella/0x05_fella_editor/edit-view-group.png"></th>
+</tr>
+</thead>
+</table>
+<h2 id="3-字符串"><a href="#3-字符串" class="headerlink" title="3. 字符串"></a>3. 字符串</h2><h3 id="3-1-各可操作项简介"><a href="#3-1-各可操作项简介" class="headerlink" title="3.1 各可操作项简介"></a>3.1 各可操作项简介</h3><p>当操作的是字符串的时候，这边会有如下可供操作内容：</p>
+<ul>
+<li>字符串标识符编辑框，不可为空，右侧有个刷新按钮，可以随机生成一个字符串标识</li>
+<li>字符串常量编辑框，如果您当前选择的多语言文件支持常量的话，才会显示，右侧有一个刷新按钮，用于处理输入的字符串标识到当前编辑框，方便您的快捷输入</li>
+<li>标签编辑框，可以提供您对于当前字符串标签的编辑，比如哪个版本加的，哪个业务线的内容，属于哪个模块等等，在右侧有一个标签选择按钮，在弹出的气泡视图里会显示当前文件中的所有标签内容以供您快速选择使用</li>
+<li>备注内容编辑框，用于对当前字符串的备注说明，比如做什么用的，在哪里用的等等</li>
+<li>分组选择按钮，用于选择当前字符串所在的分组</li>
+<li>多语言内容编辑区域，显示各语言的内容信息，该区域会根据您所选中的多语言文件而有不同的效果<ul>
+<li>如果当前文件语言数大于4个，那么语言编辑区域会变成可滑动的模式，每个编辑框的高度限定在120像素，让您能够查看到各个语言的内容，且不会因为高度不够而显示不下所有内容</li>
+<li>如果当前文件语言数小于等于4个，那么语言编辑区域会被各语言编辑框充满整个区域并且等分高度</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-语言编辑框简介"><a href="#3-2-语言编辑框简介" class="headerlink" title="3.2 语言编辑框简介"></a>3.2 语言编辑框简介</h3><p><img src="/Fella/0x05_fella_editor/string-editor-field.jpg"></p>
+<p>下部分为主要编辑区，会显示当前编辑的多语言字符串内容，在这里您不必关心双引号的和换行符的转义，该是怎么样就怎么写就行，在导出到想中的时候我会对所有需要转义的内容做处理，保证不会出现Xcode的编译异常。</p>
+<p>在编辑区如果在当前使用过程中对该字符串有过改动，会在内容后面显示一个颜色淡一点的改动前的内容。</p>
+<p>内容编辑区的左上角会显示当前编辑区对应的语言类型是什么。</p>
+<p>在右上角会有一些辅助的功能按钮：</p>
+<ul>
+<li>放大按钮，会把当前笔记框放大到整个字符串编辑区域，适用于专注的编辑某种语言内容，或者编辑长文本内容；当然相对的，放大后还能够缩小回来。</li>
+<li>恢复按钮，如果当前语言的内容在本次使用中所有改动的时候才会显示，用于直接把内容恢复到使用时的样子。</li>
+<li>拷贝按钮，用于拷贝当前内容到粘贴板。</li>
+<li>翻译按钮，用于对当前编辑框内容执行翻译操作，这个功能需要您自定义翻译脚本来支持，脚本入口在Fella左上部分的操作功能区。</li>
+<li>复制到按钮，用于把当前编辑框内容复制到其他语言输入框内</li>
+</ul>
+<h3 id="3-3-新建字符串"><a href="#3-3-新建字符串" class="headerlink" title="3.3 新建字符串"></a>3.3 新建字符串</h3><p>选择新建字符串后，所有内容都会被清空，字符串标识符会自动的生成一个随机内容，方便您的使用。</p>
+<h3 id="3-4-编辑字符串"><a href="#3-4-编辑字符串" class="headerlink" title="3.4 编辑字符串"></a>3.4 编辑字符串</h3><p>当您选择单个字符串的时候，该区域会变成字符串编辑模式。</p>
+<p>这里有个特别的地方，<strong>如果您当前选中的多语言文件语言数量大于4个，那么会在编辑区的顶部显示一个切换按钮，用于切换查看和编辑模式</strong>，也就是说，哪怕您只选择一条字符串内容，也可以显示为查看模式。这么做是因为当语言过多的时候，多语言内容编辑区会显示为可滚动的样式，那么如果您想要看到所有语言内容的话，就需要滚动编辑区域才能看到，如果语言数很多的话，就很难做直观的对比查看，所以对于语言数较多的情况下特别做了如此支持。</p>
+<p>在您正常的编辑字符串执行保存时，如果字符串标识符或者常量内容发生了改变，会有一个提示信息对您发出询问，是否需要把项目中对应使用到的代码内容也相应的修改，如果您选择了同意，那么Fella就会遍历所有代码文件，查找使用到改动前字符串常量或者标识符的地方，并替换为新的内容。</p>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x04 Fella内容区及右键菜单说明</title>
+    <url>/Fella/0x04_fella_content/</url>
+    <content><![CDATA[<p>Fella的内容区是整个项目中字符串资源的完整展示区，以表格的样式将所有字符串的各语言内容、常量、状态等等显示出来。</p>
+<p>同时，在内容区还提供了一系列的右键功能，本章我们会重点介绍一下功能。</p>
+<span id="more"></span>
+
+
+
+<h2 id="1-显示内容"><a href="#1-显示内容" class="headerlink" title="1. 显示内容"></a>1. 显示内容</h2><p>所有显示内容都是按照分组显示的，包括各种搜索、筛选的结果。</p>
+<p>所有列的显示数据包括以下内容：</p>
+<ul>
+<li>字符串状态<ul>
+<li>⚠️ 表示当前字符串的标识、常量、多语言字符串等主要内容有缺失；</li>
+<li>✏️ 表示当前字符串在本次使用中有编辑；</li>
+<li>🌟 表示是在本次使用中新加入的内容。</li>
+</ul>
+</li>
+<li>字符串标识</li>
+<li>常量</li>
+<li>标签</li>
+<li>各语言内容</li>
+</ul>
+<p>所有列是可拖动改变顺序的，对于语言列的顺序改动，会同样的作用到右侧字符串编辑页面，而且这个顺序也是会记忆的，需要注意的是，<strong>保存的顺序只会保存语言列的顺序，其他列不记。</strong></p>
+<h2 id="2-搜索组件"><a href="#2-搜索组件" class="headerlink" title="2. 搜索组件"></a>2. 搜索组件</h2><p><img src="/Fella/0x04_fella_content/content_search_config.png"></p>
+<p>在激活app后按下<code>command + F</code>或者<code>command+shift+F</code>组合键或者在主内容区右键选择对应功能，会在内容区显示出这个页面。</p>
+<h3 id="2-1-批量处理方案"><a href="#2-1-批量处理方案" class="headerlink" title="2.1 批量处理方案"></a>2.1 批量处理方案</h3><p>支持搜索和替换操作，如菜单1，可以在搜索框左侧选择切换</p>
+<h3 id="2-2-筛选内容"><a href="#2-2-筛选内容" class="headerlink" title="2.2 筛选内容"></a>2.2 筛选内容</h3><p>筛选内容支持两种方式，但是同时生效的只能是一种：</p>
+<ul>
+<li><strong>只搜索选定内容</strong></li>
+<li><strong>选定内容除外</strong></li>
+</ul>
+<p>每种方式下的筛选条件会把所有语言列出，和支持筛选的列项。</p>
+<h3 id="2-3-匹配方式"><a href="#2-3-匹配方式" class="headerlink" title="2.3 匹配方式"></a>2.3 匹配方式</h3><p>支持以下匹配方式：</p>
+<ul>
+<li><strong>包含</strong>，只要包含搜索内容，即算命中匹配</li>
+<li><strong>完全匹配</strong>，必须完整匹配搜索内容，才算命中匹配</li>
+<li><strong>以…开始</strong>，必须以搜索内容开始，才算命中匹配</li>
+<li><strong>以…结尾</strong>，必须以搜索内容结尾，才算命中匹配</li>
+<li><strong>正则匹配</strong>，使用正则表达式匹配搜索结果</li>
+</ul>
+<h2 id="3-右键菜单"><a href="#3-右键菜单" class="headerlink" title="3. 右键菜单"></a>3. 右键菜单</h2><p>对于内容区域右键会有菜单显示，根据不同的状态显示内容也不一样：</p>
+<ul>
+<li><strong>筛选内容</strong>，指的是执行了各种筛选、搜索操作后显示的结果</li>
+<li><strong>选中内容</strong>，指的是用户在列表中选中了某些行</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>- 没有筛选内容<br>- 没有选中行内容</th>
+<th>- 没有筛选内容<br>- 有选中行内容</th>
+<th>- 有筛选内容<br>- 没有选中行内容</th>
+<th>- 有筛选内容<br>- 有选中行内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="/Fella/0x04_fella_content/content-menu1.png"></td>
+<td><img src="/Fella/0x04_fella_content/content-menu2.png"></td>
+<td><img src="/Fella/0x04_fella_content/content-menu3.png"></td>
+<td><img src="/Fella/0x04_fella_content/content-menu4.png"></td>
+</tr>
+</tbody></table>
+<h3 id="3-1-跳转类"><a href="#3-1-跳转类" class="headerlink" title="3.1 跳转类"></a>3.1 跳转类</h3><h4 id="3-1-1-跳至有缺失的行"><a href="#3-1-1-跳至有缺失的行" class="headerlink" title="3.1.1 跳至有缺失的行"></a>3.1.1 跳至有缺失的行</h4><p>从当前选中行开始，跳转至下一个有缺失的行，如果有很多条，会依次循环跳转。</p>
+<h4 id="3-1-2-跳至被编辑行"><a href="#3-1-2-跳至被编辑行" class="headerlink" title="3.1.2 跳至被编辑行"></a>3.1.2 跳至被编辑行</h4><p>从当前选中行开始，跳转至下一个在本次使用中被编辑的行，如果有很多条，会依次循环跳转。</p>
+<h4 id="3-1-3-跳至新建内容行"><a href="#3-1-3-跳至新建内容行" class="headerlink" title="3.1.3 跳至新建内容行"></a>3.1.3 跳至新建内容行</h4><p>从当前选中行开始，跳转至下一个在本次使用中新建的内容行，如果有很多条，会依次循环跳转。</p>
+<h4 id="3-1-4-跳至选中行"><a href="#3-1-4-跳至选中行" class="headerlink" title="3.1.4 跳至选中行"></a>3.1.4 跳至选中行</h4><p>跳转至被选中的行，方便在列表滑动时快速回到被选中的位置。</p>
+<h3 id="3-2-搜索类"><a href="#3-2-搜索类" class="headerlink" title="3.2 搜索类"></a>3.2 搜索类</h3><h3 id="3-2-1-搜索"><a href="#3-2-1-搜索" class="headerlink" title="3.2.1 搜索"></a>3.2.1 搜索</h3><p>用于快速查找到自己需要的内容，也可以在激活app后，按下”command+F”组合键快速显示搜索组件(详细见<strong>2. 搜索组件</strong>)，当再次执行搜索操作的时候会自动隐藏掉搜索组件。</p>
+<h4 id="3-2-2-搜索并替换"><a href="#3-2-2-搜索并替换" class="headerlink" title="3.2.2 搜索并替换"></a>3.2.2 搜索并替换</h4><p>用于方便快捷的替换指定的内容，也可以在激活app后，按下”option+command+F”组合键快速显示搜索替换组件(详细见<strong>2. 搜索组件</strong>)，当再次执行搜索替换操作的时候，会自动隐藏掉搜索替换组件。</p>
+<h4 id="3-2-3-批量搜索"><a href="#3-2-3-批量搜索" class="headerlink" title="3.2.3 批量搜索"></a>3.2.3 批量搜索</h4><p>支持批量搜索本地还字符串内容，但是当前只支持完整匹配字符串标识类的搜索，所有内容以换行为分隔，如：</p>
+<pre><code>com.auu.localization.chooiceLanguageNameKey
+com.auu.localization.commentName
+com.auu.localization.commonSettingName
+com.auu.localization.compareActionName
+com.auu.localization.confirmTitleName
+</code></pre>
+<h3 id="3-3-随机生成所有文本标识"><a href="#3-3-随机生成所有文本标识" class="headerlink" title="3.3 随机生成所有文本标识"></a>3.3 随机生成所有文本标识</h3><p>对当前选中文件中的所有本地还字符串内容做生成随机字符串标识操作，为了安全操作，如果对于当前选中文件没有选择有效的常量文件，那么会有一个提醒内容，询问您是否执行操作。</p>
+<p>因为常量字符串是对字符串标识的有效引用，所以哪怕字符串标识有所改变，只要对应的常量没有改变，在项目中的使用的常量任然是有效的。</p>
+<h3 id="3-4-针对选中字符串内容"><a href="#3-4-针对选中字符串内容" class="headerlink" title="3.4 针对选中字符串内容"></a>3.4 针对选中字符串内容</h3><h4 id="3-4-1-生成随机标识"><a href="#3-4-1-生成随机标识" class="headerlink" title="3.4.1 生成随机标识"></a>3.4.1 生成随机标识</h4><p>同第<strong>3.3</strong>条一样，只不过当前操作只对选中的本地化字符串内容有效。</p>
+<h4 id="3-4-2-删除本地化字符串"><a href="#3-4-2-删除本地化字符串" class="headerlink" title="3.4.2 删除本地化字符串"></a>3.4.2 删除本地化字符串</h4><p>直接从当前选中的文件中删除选中的本地化字符串内容。</p>
+<h4 id="3-4-3-移除标签"><a href="#3-4-3-移除标签" class="headerlink" title="3.4.3 移除标签"></a>3.4.3 移除标签</h4><table>
+<thead>
+<tr>
+<th>用于给选定字符串移除标签。<br><br>在子菜单中显示选中字符串内容的所有标签，选中某个标签后，会遍历所有选中字符串，如果包含选择的标签类型，就会从字符串的标签列表中移除该标签。</th>
+<th><img src="/Fella/0x04_fella_content/content-remove-tags.png"></th>
+</tr>
+</thead>
+</table>
+<h4 id="3-4-4-增加标签"><a href="#3-4-4-增加标签" class="headerlink" title="3.4.4 增加标签"></a>3.4.4 增加标签</h4><table>
+<thead>
+<tr>
+<th>用于给选定字符串添加标签。<br><br>在子菜单中会显示当前本地化文件中的所有标签，选择某一项后，会对所有选中内容增加选择的标签。<br><br>在这里也支持新建标签，支持同时新建多个，每输入完一个，可以按回车以开启下一个标签的输入，如果取消的话，可以删除所有内容后，再点击确定。</th>
+<th><img src="/Fella/0x04_fella_content/content-add-tags.png"></th>
+</tr>
+</thead>
+</table>
+<h4 id="3-4-5-拷贝"><a href="#3-4-5-拷贝" class="headerlink" title="3.4.5 拷贝"></a>3.4.5 拷贝</h4><table>
+<thead>
+<tr>
+<th>用于拷贝当前选中的本地化字符串内容的某些特定信息，所有拷贝内容都以换行符分隔。</th>
+<th><img src="/Fella/0x04_fella_content/010-menu-copy.png"></th>
+</tr>
+</thead>
+</table>
+<h4 id="3-4-6-复制到"><a href="#3-4-6-复制到" class="headerlink" title="3.4.6 复制到"></a>3.4.6 复制到</h4><p><img src="/Fella/0x04_fella_content/content-copyto.png"></p>
+<p>用于将选中内容复制到其他的本地化文件中。</p>
+<p>如果选中了目标文件的某个分组，会把内容复制到选中的分组中，如果选择了自动匹配，会以当前选中的内容为主，从目标文件中查找相同的分组，如果有则会复制到目标分组中，如果没有，则会先创建一个相同的分组，然后再复制内容过去。</p>
+<h4 id="3-4-7-移动本地化字符串到分组"><a href="#3-4-7-移动本地化字符串到分组" class="headerlink" title="3.4.7 移动本地化字符串到分组"></a>3.4.7 移动本地化字符串到分组</h4><table>
+<thead>
+<tr>
+<th>移动选中的本地化字符串内容到指定的分组，也可以直接移动到一个新建的分组。</th>
+<th><img src="/Fella/0x04_fella_content/011-menu-move.png"></th>
+</tr>
+</thead>
+</table>
+<h3 id="3-5-针对选中分组内容"><a href="#3-5-针对选中分组内容" class="headerlink" title="3.5 针对选中分组内容"></a>3.5 针对选中分组内容</h3><h4 id="3-5-1-强制删除分组"><a href="#3-5-1-强制删除分组" class="headerlink" title="3.5.1 强制删除分组"></a>3.5.1 强制删除分组</h4><p>删除分组的同时，将会把该分组下的所有本地化字符串内容一并删除掉(默认分组不支持被删除)，所以，一般来说，对于分组的删除是不建议的，除非说您有很强烈的需求。</p>
+<h4 id="3-5-2-移动内容并删除分组"><a href="#3-5-2-移动内容并删除分组" class="headerlink" title="3.5.2 移动内容并删除分组"></a>3.5.2 移动内容并删除分组</h4><p>将当前分组的内容先移动到选定分组，然后再删除当前分组。</p>
+<h3 id="3-6-集中显示内容"><a href="#3-6-集中显示内容" class="headerlink" title="3.6 集中显示内容"></a>3.6 集中显示内容</h3><h4 id="3-6-1-显示有缺失的内容"><a href="#3-6-1-显示有缺失的内容" class="headerlink" title="3.6.1 显示有缺失的内容"></a>3.6.1 显示有缺失的内容</h4><p>集中显示所有有缺失的内容，此处的缺失包含所有语言下内容的缺失和常量内容的缺失。</p>
+<h4 id="3-6-2-显示有改动的内容"><a href="#3-6-2-显示有改动的内容" class="headerlink" title="3.6.2 显示有改动的内容"></a>3.6.2 显示有改动的内容</h4><p>集中显示在本次使用中有改动的内容。</p>
+<h4 id="3-6-3-显示新建内容"><a href="#3-6-3-显示新建内容" class="headerlink" title="3.6.3 显示新建内容"></a>3.6.3 显示新建内容</h4><p>集中显示在本次使用中新建的字符串内容。</p>
+<h4 id="3-6-4-显示分组内容"><a href="#3-6-4-显示分组内容" class="headerlink" title="3.6.4 显示分组内容"></a>3.6.4 显示分组内容</h4><p>集中显示选中分组下的所有内容。</p>
+<h4 id="3-6-5-显示标签内容"><a href="#3-6-5-显示标签内容" class="headerlink" title="3.6.5 显示标签内容"></a>3.6.5 显示标签内容</h4><p>集中显示所有包含选中标签的字符串内容。</p>
+<h4 id="3-6-6-显示指定用户创建的内容"><a href="#3-6-6-显示指定用户创建的内容" class="headerlink" title="3.6.6 显示指定用户创建的内容"></a>3.6.6 显示指定用户创建的内容</h4><p>集中显示所有选中用户创建的内容，该功能只在2.0.0版本及以后支持。</p>
+<h4 id="3-6-7-显示选定日期内内容"><a href="#3-6-7-显示选定日期内内容" class="headerlink" title="3.6.7 显示选定日期内内容"></a>3.6.7 显示选定日期内内容</h4><table>
+<thead>
+<tr>
+<th>集中显示选定日期内的所有内容，该功能只在2.0.0版本及以后支持。<br><br>暂时只支持如图所示的日期区间。</th>
+<th><img src="/Fella/0x04_fella_content/content-date-filter.png"></th>
+</tr>
+</thead>
+</table>
+<h3 id="3-7-复杂筛选类"><a href="#3-7-复杂筛选类" class="headerlink" title="3.7 复杂筛选类"></a>3.7 复杂筛选类</h3><h4 id="3-7-1-显示未使用内容"><a href="#3-7-1-显示未使用内容" class="headerlink" title="3.7.1 显示未使用内容"></a>3.7.1 显示未使用内容</h4><p>遍历所有项目代码，使用当前文件中的字符串常量和字符串标识去做遍历筛选，查找所有在项目中没有使用到的内容。</p>
+<h4 id="3-7-2-显示相似内容"><a href="#3-7-2-显示相似内容" class="headerlink" title="3.7.2 显示相似内容"></a>3.7.2 显示相似内容</h4><table>
+<thead>
+<tr>
+<th>以选定的方式全局的匹配相似内容。<br><br>此处的相似内容指的是整个本地化字符串的相似，在选定的语言下内容相同即表示相似，比如在复杂的”过滤所有语言”下会有如下结果：</th>
+<th><img src="/Fella/0x04_fella_content/012-menu-filter.png" alt="012-menu-filter"></th>
+</tr>
+</thead>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>zh-Hans</th>
+<th>ja</th>
+<th>En</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>确定</td>
+<td>決定する</td>
+<td>Confirmed</td>
+</tr>
+<tr>
+<td>2</td>
+<td>决定</td>
+<td>決定する</td>
+<td>Decide</td>
+</tr>
+<tr>
+<td>3</td>
+<td>确定</td>
+<td>決定する</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>4</td>
+<td>好的</td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+</tbody></table>
+<p>其中第一条和第4条没有任何一条内容相同，但是在数据处理的过程中，以第二行或者第三行为媒介，就会得到如上的结果。</p>
+<h3 id="3-8-筛选结果操作"><a href="#3-8-筛选结果操作" class="headerlink" title="3.8 筛选结果操作"></a>3.8 筛选结果操作</h3><h4 id="3-8-1-返回列表"><a href="#3-8-1-返回列表" class="headerlink" title="3.8.1 返回列表"></a>3.8.1 返回列表</h4><p>用于在执行搜索、显示相似内容等操作后，返回到主内容列表。</p>
+<h4 id="3-8-2-导出所有结果"><a href="#3-8-2-导出所有结果" class="headerlink" title="3.8.2 导出所有结果"></a>3.8.2 导出所有结果</h4><p>用于在执行搜索、显示相似内容等操作后，导出执行操作的结果，导出的格式为CSV格式。</p>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x03 Fella功能模块简介</title>
+    <url>/Fella/0x03_fella_summary/</url>
+    <content><![CDATA[<p>为了方便您的使用，Fella各模块间采用紧凑直观的布局方式，将各主要操作工具、重要的信息内容紧凑的排列，让您一眼即达，一触即达。</p>
+<p>下面就让我们来简单看下各模块职责划分吧。</p>
+<span id="more"></span>
+
+<p><img src="/Fella/0x03_fella_summary/005-search-complete.png"></p>
+<p>如图所示，我们将Fella主页面分为7个模块，下面我们来一一介绍。</p>
+<blockquote>
+<p>在项目的迭代过程中，整个app的UI样式会不断的优化改善，但是整体的结构都是一样的。</p>
+<p>如果后续整体结构有所改动，我会第一时间在这里同步更新的。</p>
+</blockquote>
+<h3 id="1-页面导航"><a href="#1-页面导航" class="headerlink" title="1. 页面导航"></a>1. 页面导航</h3><p>用于显示/隐藏底部日志区(<code>command+L</code>)、右边编辑区(<code>command+K</code>)，支持快捷键操作。</p>
+<h3 id="2-快捷导出"><a href="#2-快捷导出" class="headerlink" title="2. 快捷导出"></a>2. 快捷导出</h3><p>快捷导出功能(<code>command+E</code>)，在菜单栏里设置了快捷导出的语言之后，就会显示该按钮，也支持快捷键操作。</p>
+<h3 id="3-文件切换"><a href="#3-文件切换" class="headerlink" title="3. 文件切换"></a>3. 文件切换</h3><p>在我们的项目中，每种语言都会对应一个strings文件，有时我们为了文件的拆分，又会增加不同的多语言文件，如：</p>
+<pre><code>├── de.lproj
+│   ├── Localizable.strings
+│   ├── Main.strings
+│   └── TestLization.strings
+├── en.lproj
+│   ├── Localizable.strings
+│   ├── Main.strings
+│   └── TestLization.strings
+├── ja.lproj
+│   ├── Localizable.strings
+│   ├── Main.strings
+│   └── TestLization.strings
+└── zh-Hans.lproj
+    ├── Localizable.strings
+    ├── Main.strings
+    └── TestLization.strings
+</code></pre>
+<p>经过Fella解析后，就会产生这样的三个实体对象，每个strings对象下管理着其对应的各语言strings文件：</p>
+<pre><code>Localizable.strings
+    ├── de.lproj/Localizable.strings
+    ├── en.lproj/Localizable.strings
+    ├── ja.lproj/Localizable.strings
+    └── zh-Hans.lproj/Localizable.strings
+
+TestLization.strings
+    ├── de.lproj/TestLization.strings
+    ├── en.lproj/TestLization.strings
+    ├── ja.lproj/TestLization.strings
+    └── zh-Hans.lproj/TestLization.strings
+
+Main.strings
+    ├── de.lproj/Main.strings
+    ├── en.lproj/Main.strings
+    ├── ja.lproj/Main.strings
+    └── zh-Hans.lproj/Main.strings
+</code></pre>
+<p>在这部分我们就会切换：<code>Localizable.strings</code>、<code>TestLization.strings</code>、<code>Main.strings</code>几个文件。</p>
+<p>有些时候可能用了一些第三方的源码到项目中，在做资源遍历的时候会把三方源码里的strings文件也遍历到。为了避免重名导致的不方便确认，所以在切换strings文件的时候，会显式的提示文件的相对路径，避免您在使用时选择错误。</p>
+<h3 id="4-内容区"><a href="#4-内容区" class="headerlink" title="4. 内容区"></a>4. 内容区</h3><p>内容区是整个项目中字符串资源的完整展示区，以表格的样式将所有字符串的各语言内容、常量、状态等等显示出来。</p>
+<p>其中，第一列的显示的是各字符串内容的状态，包括以下几种：</p>
+<ul>
+<li><p>⚠️ 表示当前字符串的标识、常量、多语言字符串等主要内容有缺失；</p>
+</li>
+<li><p>✏️ 表示当前字符串在本次使用中有编辑；</p>
+</li>
+<li><p>🌟 表示是在本次使用中新加入的内容。</p>
+</li>
+</ul>
+<p>同时，为了方便使用，在内容区右键会有一个辅助菜单，提供了一些辅助性的操作功能，这个后面单讲。</p>
+<h3 id="5-内容编辑"><a href="#5-内容编辑" class="headerlink" title="5. 内容编辑"></a>5. 内容编辑</h3><p>展示、编辑多语言字符串、分组的部分。</p>
+<h3 id="6-操作日志"><a href="#6-操作日志" class="headerlink" title="6. 操作日志"></a>6. 操作日志</h3><p>展示了各主要操作的历史记录，方便您的回溯，其中所有蓝色超链接样式的内容都可点击。</p>
+<h3 id="7-本地化进度"><a href="#7-本地化进度" class="headerlink" title="7. 本地化进度"></a>7. 本地化进度</h3><p>实时展示各语言内容的本地化进度，如果显示红色的，说明这个语言类型下的字符串内容有些是有缺失的。</p>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x02 启动app</title>
+    <url>/Fella/0x02_fella_startup/</url>
+    <content><![CDATA[<p>Fella是一款文档工具类APP，所以有类似于Xcode一样支持快速启动的操作，下面我们从启动app开始。</p>
+<p>启动app后，在右侧会有三个按钮以供操作。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="1-选择Xcode项目目录（新建项目）"><a href="#1-选择Xcode项目目录（新建项目）" class="headerlink" title="1. 选择Xcode项目目录（新建项目）"></a>1. 选择Xcode项目目录（新建项目）</h2><p>选择需要处理的Xcode项目所在的文件夹，如果您选择的项目比较大，在选择后会经过一点时间的等待，用于查找所有有效的“strings”文件。</p>
+<blockquote>
+<p>让用户去选择Xcode项目所在的文件夹而不是直接选择<code>xcodeproj</code>文件，是因为需要保存工作文件夹的权限，因为app如果想要上App Store，就必须有沙盒权限的限制，只能访问用户选择的文件夹或者申请了权限的文件夹，所以，为了在下次使用时不需要再次执行选择操作，才会使用选择文件夹的方案。<a href="https://developer.apple.com/documentation/security/app_sandbox/">App Sandbox</a></p>
+</blockquote>
+<p>在确定项目有效后，会跳转到下一步，用于对项目整体的设置。</p>
+<h3 id="1-1-项目设置"><a href="#1-1-项目设置" class="headerlink" title="1.1 项目设置"></a>1.1 项目设置</h3><p><img src="/Fella/0x02_fella_startup/0x02-Fella-Startup-Settings.png"></p>
+<h4 id="1-1-1-常量文件设置"><a href="#1-1-1-常量文件设置" class="headerlink" title="1.1.1 常量文件设置"></a>1.1.1 常量文件设置</h4><p>就如我们开篇文章所说的，我们每个strings文件最好都应该对应着一个常量文件，以方便我们的开发，这里会把搜索到的所有strings文件都列举出来，我们可以对每个strings文件选择对应的常量文件，选择后会显示相对于项目根目录的相对路径，同时，也可以选择叉号取消选择。</p>
+<p>如果您的常量文件是OC文件，选择对应的<code>.h</code>或者<code>.m</code>都可以，这个选择是非必需的，如果您的strings文件没有对应的常量文件，也可以不用选择。</p>
+<h4 id="1-1-2-筛选操作设置"><a href="#1-1-2-筛选操作设置" class="headerlink" title="1.1.2 筛选操作设置"></a>1.1.2 筛选操作设置</h4><p>这一步有三个设置项：</p>
+<ul>
+<li><p>本地化方法设置，是指您在项目中用于执行本地化操作的方法，也可以说是您对系统的 <code>NSLocalizedString</code> 方法做了怎样的封装，我这里为了省事，就是这样做的：</p>
+<pre><code class="swift">func LL(_ key: String, _ comment: String? = nil) -&gt; String &#123;
+    return NSLocalizedString(key, comment: comment ?? &quot;comment&quot;)
+&#125;
+</code></pre>
+</li>
+<li><p>搜索路径，用于指定搜索的内容，如果您在项目中手动引入了过多的第三方内容进入，为了节省一些文件遍历，可以选择您需要的主工程目录</p>
+</li>
+<li><p>忽略的路径，是对于上一条的补充，在您选的路径下，如果有些目录下的内容不需要筛选，可以在这里过滤掉。在使用的时候我也会主动的忽略Pods目录和一些隐藏目录，减少文件遍历的复杂度。</p>
+</li>
+</ul>
+<h4 id="1-1-3-其他提醒"><a href="#1-1-3-其他提醒" class="headerlink" title="1.1.3 其他提醒"></a>1.1.3 其他提醒</h4><p>上述两个操作可以在后续使用中补充设置，但是为了使用的流畅性，还是建议在初始的时候都给添加上。如果您暂时不想使用，还可以点击返回上一步。</p>
+<h3 id="1-2-搜索并进入主页面"><a href="#1-2-搜索并进入主页面" class="headerlink" title="1.2 搜索并进入主页面"></a>1.2 搜索并进入主页面</h3><p>在步骤<strong>1.1</strong>的设置都完成后，可以选择<strong>搜索并进入主页面</strong>开始使用，在搜索的过程中，我会这样做：</p>
+<ol>
+<li>搜索遍历您项目中所有的strings文件，并使用正则表达式依次遍历所有的字符串</li>
+<li>如果有重复的<code>key</code>，我会在进入主页面后的日志区域依次显示出来</li>
+<li>在遍历完所有的strings后，我会去筛选常量文件，跟对应的strings内容匹配起来</li>
+<li>如果常量内容里某一条内容没有找到对应strings的key，我会忽略这一条</li>
+<li>搜索完成进入下一步</li>
+</ol>
+<h3 id="1-3-选择数据类型-Fella-版本-2-0-0及以上版本"><a href="#1-3-选择数据类型-Fella-版本-2-0-0及以上版本" class="headerlink" title="1.3 选择数据类型 (Fella 版本 2.0.0及以上版本)"></a>1.3 选择数据类型 (Fella 版本 2.0.0及以上版本)</h3><p><img src="/Fella/0x02_fella_startup/0x02-Fella-Startup-FileType.png"></p>
+<p>在2.0.0版本以前，执行<strong>1.2</strong>步以后，会直接进入主app，从2.0.0版本开始，我在项目中增加了一项数据类型的选择，先看一下两种类型：</p>
+<ul>
+<li><p>单个文件保存</p>
+<blockquote>
+<p>把所有信息都保存到<code>i18nproj</code>内的同一文件里，这种方式适用于数据量比较少的情况。</p>
+<p>比如您Xcode项目中所有<code>.strings</code>里的所有字符串数量之和小于10000条(每个<code>\&quot;xxx\&quot;=\&quot;xxxx\&quot;;</code>算是一条)，比较适合这种方式。</p>
+</blockquote>
+</li>
+<li><p>拆分多个文件保存</p>
+<blockquote>
+<p>把所有信息按照语言和类型拆分到不同的文件里，这种情况下，如果您使用git管理<code>i18nproj</code>，那么，每一次的内容修改都会在git里产生多个变动。</p>
+<p>如果您需要直观查看各种存储数据，或者数据量较大的话，推荐使用这种方式。</p>
+</blockquote>
+</li>
+</ul>
+<p>详细的解释在弹出的窗口中也有说明。</p>
+<p>在使用Fella的过程中，我也希望能想Xcode Project 一样可以做到多人、多分支协作开发，这样的话就难免会互相之间有冲突产生，而且即使没有冲突，在每次有数据变动的时候，我们也希望能在SourceTree等Git操作客户端来查看变动和解决冲突，于是，我对数据做了类似<code>.xcodeproj</code>的拆分和组合，以便方便查阅和对比。</p>
+<p>在2.0.0以前我把所有数据都存到了一个文件中(右键<code>.i18nproj</code>文件，查看包内容可以看到各种存储资源分类)，这种做法对于比较小的项目，或者本地化字符串资源较少的项目来说，还挺好，直到有一天，我在同步项目数据的时候，把<code>.i18nproj</code>文件做到了8MB的大小，在使用sourcetree去查看变动就完全不可行了(虽然可以设置Size limit)，但是文件大了的话，解析起来也是会有点困难的。</p>
+<p>于是我在2.0.0的时候增加了一个拆分文件的功能，做成类似于xocde项目中strings类似的文件分布，这样就很好的解决了单个文件过大的问题，单同时也有另一个问题产生，如果Xcode项目支持的语言很多，那么每次数据的改动产生的文件变动会很多。</p>
+<p>所以，我个人的建议是，<strong>如果您是在个人使用Fella，那么什么格式都无所谓，如果您是多人协作开发的话， 看您项目的大小了。</strong></p>
+<p><strong>重要提醒</strong>：存储数据格式在使用中也可以修改，但是每次修改后，为了保证数据不丢失，您需要在每个用到Fella的分支都设置一次，保证各个分支的数据格式统一，然后再执行代码的合并操作，切记切记。</p>
+<h3 id="1-3-开始使用"><a href="#1-3-开始使用" class="headerlink" title="1.3 开始使用"></a>1.3 开始使用</h3><p>在经过上述步骤后，就可以进入app开始使用了。</p>
+<hr>
+<h2 id="2-打开已经存在的Fella项目"><a href="#2-打开已经存在的Fella项目" class="headerlink" title="2. 打开已经存在的Fella项目"></a>2. 打开已经存在的Fella项目</h2><p><img src="/Fella/0x02_fella_startup/0x02_Fella_startup_history.png"></p>
+<p>在使用Fella的过程中，我们可以随时保存当前项目为一个<code>i18nproj</code>项目文件，以方便后续使用。</p>
+<p>如果是在您当前设备保存的某个Fella项目的话，在启动app后，会有一个最近浏览，显示您最近使用的项目列表，点击您需要打开的项目即可开始正常使用。</p>
+<p>如果您没有在当前设备上保存过Fella项目，您可以在启动app后，选择<strong>打开已经存在的Fella项目</strong>选项来选择打开一个本地存在的Fella项目，或者直接在本地双击<code>i18nproj</code>项目文件即可启动Fella。</p>
+<h3 id="2-1-打开在本地保存的i18nproj项目文件"><a href="#2-1-打开在本地保存的i18nproj项目文件" class="headerlink" title="2.1 打开在本地保存的i18nproj项目文件"></a>2.1 打开在本地保存的<code>i18nproj</code>项目文件</h3><p>项目会正常启动，开始使用。</p>
+<h3 id="2-2-打开一个没有在本地保存的i18nproj项目文件"><a href="#2-2-打开一个没有在本地保存的i18nproj项目文件" class="headerlink" title="2.2 打开一个没有在本地保存的i18nproj项目文件"></a>2.2 打开一个没有在本地保存的<code>i18nproj</code>项目文件</h3><p>由于Fella主要是处理Xcode项目本地化而生的，所以我会首先查一下Fella保存的项目根目录下有没有对应的Xcode项目，如果有的话，就可以正常开始使用；如果没有的话，我会提示您在本地选择对应的Xcode项目目录，当然您也可以不选择，这时候部分功能将会被限制，这种情况适用于把<code>i18nproj</code>项目文件发给产品或者其他人查看编辑使用。</p>
+<h3 id="2-3-恢复i18nproj项目文件中的资源内容"><a href="#2-3-恢复i18nproj项目文件中的资源内容" class="headerlink" title="2.3 恢复i18nproj项目文件中的资源内容"></a>2.3 恢复<code>i18nproj</code>项目文件中的资源内容</h3><p>我会首先解析<code>i18nproj</code>项目文件中的资源信息，然后再根据所在项目路径，查找Xcode项目所在路径下的所有strings文件和常量文件，如果以Xcode项目里的资源为主，以<code>i18nproj</code>项目文件中的资源为辅，把所有资源都解析完成后，就会开始正常的使用Fella项目。</p>
+<hr>
+<h2 id="3-查看帮助"><a href="#3-查看帮助" class="headerlink" title="3. 查看帮助"></a>3. 查看帮助</h2><p>用于打开当前网页，给初用者一个比较友好的引导。</p>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>0x01 Fella初步介绍</title>
+    <url>/Fella/0x01_fella_instructions/</url>
+    <content><![CDATA[<p><strong>欢迎您使用<code>Fella</code>！！！</strong></p>
+<p><code>Fella</code>是一款针对Xcode项目辅助处理开发中i18n内容的工具，其中提供了很多实用的功能，大大的简化了开发过程中的本地化操作，并使您的开发效率有很大的提升。</p>
+<span id="more"></span>
+
+<h2 id="1-Fella-简介"><a href="#1-Fella-简介" class="headerlink" title="1. Fella 简介"></a>1. Fella 简介</h2><h3 id="1-1-先看几个问题"><a href="#1-1-先看几个问题" class="headerlink" title="1.1 先看几个问题"></a>1.1 先看几个问题</h3><ul>
+<li><p>什么是本地化？</p>
+<p>可以看看<a href="https://developer.apple.com/localization/#localize">Apple的官方说明和教程</a>，简单来说，就是让您的app在不同的国家地区，显示对应语言的内容。</p>
+</li>
+<li><p>什么是i18n？</p>
+<p>其实是 <code>Internationalization</code>的缩写，在<code>i</code>与<code>n</code>之间还有18个字母，所以就简写为<code>i18n</code>。</p>
+</li>
+</ul>
+<h3 id="1-2-strings简介"><a href="#1-2-strings简介" class="headerlink" title="1.2 strings简介"></a>1.2 strings简介</h3><p>在我们正常开发过程中，对于项目支持的每种语言都会配置对应的strings文件，我们这边的书写方式如下：</p>
+<pre><code class="objc">// Comment: 鲨鱼属于脊椎动物门软骨纲(Chondrichthyes)板鳃亚纲，海生，少数种类进入淡水，为一群游速快的中大型海洋鱼类。
+// Tags: animal, carnivores, sea
+// 鲨鱼
+&quot;com.auu.localization.test.animals.sharkNameKey&quot; = &quot;Shark&quot;;
+</code></pre>
+<p>其中有四类内容：</p>
+<ol>
+<li><strong>第一行</strong> comment，对于当前字符串的注释说明，可以用来解释当前字符串是干什么用的、怎么用的、在哪儿用的等等，这个部分是非必需的，我们在开发的时候也是很少去添加；</li>
+<li><strong>第二行</strong> tags，对于当前字符串的分类，用来对字符串内容做业务、用法、功能等的分类，这个在开发时也很少用；</li>
+<li><strong>第三行</strong> 使用者自己熟悉的语言内容，比如您的项目支持汉语、英语、日语、德语等等，但是您对汉语最熟悉，如果当前是在日语的strings文件里的话，对于显示的字符串内容可能就会看不懂，所以加上对应的汉语内容，这样，在各语言文件中您都可以轻松看懂对应的字符串内容。</li>
+<li><strong>第四行</strong> 主要的字符串内容，格式是 <code>&quot;identifier&quot; = &quot;value&quot;</code>，做过本地化的都会清楚这种写法，在Fella里，前面这部分叫做**<code>Identifier</code><strong>，也叫</strong>字符串标识**，在后续的内容中也都会这么叫。</li>
+</ol>
+<p>落实到项目中，我们会这样用：</p>
+<pre><code>NSLocalizedString(&quot;com.auu.localization.test.animals.sharkNameKey&quot;, comment: &quot;鲨鱼&quot;)
+</code></pre>
+<p>通过使用各业务对应的<code>identifier</code>来本地化语言资源，但是，<code>identifier</code>是一个字符串，编译器不会对它的对错做检查，而且在编写的时候没有任何提示。</p>
+<p>想一想，如果某个字符串你使用了100遍，又假如你写错了几次，上线后会是什么后果？</p>
+<h3 id="1-3-常量文件"><a href="#1-3-常量文件" class="headerlink" title="1.3 常量文件"></a>1.3 常量文件</h3><p>为什么要写常量文件呢？简单来说就是编译器会帮忙检查写的对错啊～～书写的时候有提示啊～～</p>
+<p>所以，对于<strong>1.2</strong>里的问题，我们都会使用字符串常量来代替<code>identifier</code>的使用，如下：</p>
+<pre><code>let lTestAnimalsSharkNameKey = &quot;com.auu.localization.test.animals.sharkNameKey&quot;
+</code></pre>
+<p>当然，书写方式和命名规则各有各的想法，总之会有一个文件，里面全是字符串常量对应字符串类型的<code>identifier</code>。</p>
+<p>再来一次使用：</p>
+<pre><code>NSLocalizedString(lTestAnimalsSharkNameKey, comment: &quot;鲨鱼&quot;)
+</code></pre>
+<p>是不是方便多了？</p>
+<p>当然，<strong>为了书写或者自定义的方便，我们也会对<code>NSLocalizedString</code>方法做自己的封装处理</strong>，那这当然是看自己习惯啦。</p>
+<h3 id="1-4-资源目录"><a href="#1-4-资源目录" class="headerlink" title="1.4 资源目录"></a>1.4 资源目录</h3><p>这时候我们的资源目录可能就是这样的：</p>
+<pre><code>├── Localization.swift
+├── de.lproj
+│   └── Localizable.strings
+├── en.lproj
+│   └── Localizable.strings
+├── ja.lproj
+│   └── Localizable.strings
+└── zh-Hans.lproj
+    └── Localizable.strings
+</code></pre>
+<p>文件的数量随着支持语言的增加而增加，而我们在每次添加一个新的字符串的时候，都必须：</p>
+<ul>
+<li>把每个文件都修改一次</li>
+<li>确保每次写的<code>identifier</code>都一致</li>
+<li>确保没有重复的<code>identifier</code></li>
+<li>确保整行内容书写合法，没有漏写、错写内容</li>
+<li>确保没有文件被遗漏</li>
+<li>确保字符串中的双引号、换行符都有被正确转义</li>
+<li>确保加了末尾的分号</li>
+<li>…</li>
+</ul>
+<p>而Fella，就是为了处理这些问题而生的，我们继续往后看。</p>
+<h2 id="2-i18n文件介绍"><a href="#2-i18n文件介绍" class="headerlink" title="2. i18n文件介绍"></a>2. i18n文件介绍</h2><p>使用Fella执行保存操作(<strong><code>command + S</code></strong>)的时候，会生成一个<code>.i18nproj</code>文件，这是Fella对于您使用过程中各种设置、权限的缓存文件，方便您下次操作的时候直接打开使用。</p>
+<p>重要的是，有了这个文件，即使您发给别人也照样可以编辑查看，哪怕说他的Mac上没有您所操作的Xcode项目，我们姑且称这种模式为编辑模式。</p>
+<p><img src="/Fella/0x01_fella_instructions/021-i18n-file.png" alt="021-i18n-file"></p>
+<h2 id="3-协作开发"><a href="#3-协作开发" class="headerlink" title="3. 协作开发"></a>3. 协作开发</h2><p><code>i18nproj</code>文件中的数据做了特别的格式处理，方便您在多人合作开发中的使用，您可以把<code>i18nproj</code>文件放到<code>xcodeproj</code>同级目录，然后使用Git来做多分支管理。</p>
+<h2 id="4-主页面"><a href="#4-主页面" class="headerlink" title="4. 主页面"></a>4. 主页面</h2><p>先看下主页面样子，主要分为以下几类：</p>
+<ul>
+<li>顶部是功能导航区</li>
+<li>左中是各语言字符串及相关内容显示区</li>
+<li>左下是操作日志显示区</li>
+<li>右中是新建、修改、显示字符串、分组内容区</li>
+<li>右下是当前项目本地化进度展示区</li>
+</ul>
+<p>各内容我们后面详细介绍。。。</p>
+<p><img src="/Fella/0x01_fella_instructions/005-homepage.png"></p>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>Instruction</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Fella-隐私声明</title>
+    <url>/Fella/0x00_fella_privacy/</url>
+    <content><![CDATA[<ul>
+<li><strong>中文</strong></li>
+</ul>
+<p>Fella尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的 服务，Fella会按照本隐私权政策的规定使用和披露您的个人信息。但Fella将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下 ，Fella不会将这些信息对外披露或向第三方提供。Fella会不时更新本隐私权政策 。 您在同意Fella服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于Fella服务使用协议不可分割的一部分。</p>
+<span id="more"></span>
+
+<ol>
+<li><p>Fella会收集您的哪些信息<br>Fella是一款本地化使用的辅助开发工具，只会对您选择的本地目录权限在您当前使用的设备上做简单记忆。</p>
+</li>
+<li><p>信息使用<br>a) 首先，Fella需要记忆您选择的目录权限，以方便在下次启动项目的时候不需要再次选择；<br>b) Fella需要将您对项目做的所有改动持久化到本地；<br>c) Fella只支持用户操作发起的网络请求，不会通过网络将您的任何信息传送到本机以外的地方。</p>
+</li>
+</ol>
+<ul>
+<li><strong>English</strong></li>
+</ul>
+<p> Fella respects and protects the personal privacy of all service users. In order to provide you with more accurate and personalized services, Fella will use and disclose your personal information in accordance with the provisions of this privacy policy. But Fella will treat this information with a high degree of diligence and prudence. Except as otherwise provided in this privacy policy, Fella will not disclose or provide this information to third parties without your prior permission. Fella will update this privacy policy from time to time. When you agree to the Fella service use agreement, you are deemed to have agreed to the entire content of this privacy policy. This privacy policy is an integral part of the Fella service use agreement.</p>
+<ol>
+<li><p>What information does Fella collect about you<br>Fella is an auxiliary development tool for localization. It only remembers the permissions of the local directory you selected on the device you are currently using.</p>
+</li>
+<li><p>Use of Information<br>a) First, Fella needs to memorize the directory permissions you selected, so that you don’t need to select it again when you start the project next time;<br>b) Fella needs to persist all the changes you make to the project locally;<br>c) Fella only supports network requests initiated by user operations, and will not transmit any of your information to places other than this machine through the network.</p>
+</li>
+</ol>
+<ul>
+<li><strong>Deutsch</strong></li>
+</ul>
+<p>Fella respektiert und schützt die persönliche Privatsphäre aller Nutzer, die den Service nutzen.Um Ihnen genauere und personalisierte Dienstleistungen zu bieten, wird der Kerl Ihre persönlichen Daten gemäß den Bestimmungen dieser Datenschutzrichtlinie verwenden und offenlegen.Allerdings wird der Kerl diese Informationen mit einem hohen Maß an Sorgfalt und Vorsicht behandeln.Sofern in dieser Datenschutzrichtlinie nichts anderes festgelegt ist, wird der Kerl diese Informationen ohne Ihre vorherige Erlaubnis nicht offenlegen oder Dritten zur Verfügung stellen.Fella wird diese Datenschutzerklärung von Zeit zu Zeit aktualisieren.Wenn Sie dem Servicevertrag zustimmen, gelten Sie als mit allen Inhalten dieser Datenschutzrichtlinie einverstanden.Diese Datenschutzerklärung ist ein integraler Bestandteil des Freundschaftsdienstvertrages.</p>
+<ol>
+<li>Welche Informationen sammelt der Kerl über Sie<br>Fella ist ein Hilfsmittel für den lokalen Gebrauch. Es wird nur einen einfachen Speicher der lokalen Verzeichnisermächtigungen bilden, die Sie auf dem Gerät wählen, das Sie gerade verwenden.</li>
+<li>Verwendung von Informationen<br>a) Zuerst muss man sich an die von Ihnen ausgewählten Verzeichnisermächtigungen erinnern, damit man sie beim nächsten Projektstart nicht erneut auswählen muss;<br>b) Fella muss alle Änderungen an dem Projekt lokal fortsetzen;<br>c) Fella unterstützt nur Netzwerkanfragen, die von Benutzeroperationen initiiert werden, und wird keine Ihrer Informationen über das Netzwerk an andere Stellen als diese Maschine weiterleiten.</li>
+</ol>
+<ul>
+<li><strong>日本語</strong></li>
+</ul>
+<p>Fellaはサービス利用者のプライバシーを尊重し保護します。より正確で個性的なサービスを提供するために、Fellaはプライバシーポリシーの規定に従って、あなたの個人情報を使用し、開示します。しかし、Fellaは高度な勤勉、慎重義務でこれらの情報に対処します。本プライバシーポリシーに別途規定がありますが、Fellaは事前の許可を得ていない場合、これらの情報を公開または第三者に提供しません。Fellaは常にプライバシーポリシーを更新します。Fellaサービス利用契約に同意した場合、本プライバシーポリシーのすべての内容に同意したと見なします。本プライバシーポリシーはFellaサービス利用プロトコルの不可分の一部に属する。</p>
+<ol>
+<li>Fellaはどのような情報を収集しますか？<br>Fellaは現地化に使う補助開発ツールです。お選びのローカルディレクトリの権限は今使っているデバイスの中で簡単な記憶しかできません。</li>
+<li>情報の使用<br>a）まず、Fellaは次のプロジェクトを起動する時に再度選択する必要がないように、あなたが選択したディレクトリの権限を記憶する必要があります。<br>b）Fellaはプロジェクトに対するすべての変更を地元に持久化する必要があります。<br>c）Fellaは、ユーザ操作によって開始されたネットワーク要求のみをサポートしており、ネットワークを介して自機以外の場所にあなたの情報を送信しません。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Fella</category>
+      </categories>
+      <tags>
+        <tag>隐私声明</tag>
+      </tags>
+  </entry>
+</search>

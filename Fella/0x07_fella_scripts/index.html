@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    
+    <title>0x07 简单脚本交互 | Jo&#39;s Apps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1618369575286.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = false
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Jo's Apps" type="application/atom+xml">
+</head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-inner">
+                
+                    <a class="header-type-title" href="/">Jo&#39;s Apps</a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+            </div>
+            <div class="header-menu-social">
+                
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl0yso1p5000ay0r0ec7787lg" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+
+<div class="swiper-container article-gallery">
+  <div class="swiper-wrapper">
+    
+      <div class="swiper-slide">
+        <img src="/images/Fella_instruction_cover.png" itemprop="image">
+      </div>
+    
+  </div>
+  <!-- 如果需要分页器 -->
+  <div class="swiper-pagination"></div>
+</div>
+
+
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      0x07 简单脚本交互
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-09-09T16:58:42.000Z" itemprop="datePublished">2021-09-10</time>
+</div>
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/Fella/">Fella</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Instruction/" rel="tag">Instruction</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p>在Fella中，提供了一些简单的JS脚本交互支持，用于方便您的数据导入和文本翻译等，这一章内容，我会做一个简单的说明。</p>
+<span id="more"></span>
+
+<p>Fella目前提供了两个简单方法供JS调用，Fella在加载JS脚本代码的时候会向JS中注入一个<code>Fella</code>对象，您可以通过该对象来调用原生方法：</p>
+<pre><code>/// 在JS中调用Fella发起网络请求，请求结果会同时把所有参数一并带回
+/// - Parameters:
+///   - urlString: 请求地址
+///   - params: 参数
+///   - method: 方法
+///   - headers: 请求头
+///   - verification: 校验内容
+///   - callback: 回调函数，在Fella请求到结果后，会调用这个JS函数把结果回传给JS
+func request(_ urlString: String,
+             _ params: [String: Any]?,
+             _ method: String,
+             _ headers: [String: String]?,
+             _ verification: Any?,
+             _ callback: String)
+
+/// JS显示调试日志
+/// - Parameter log: 调试日志
+func showLog(_ log: Any)
+</code></pre>
+<h2 id="1-翻译脚本"><a href="#1-翻译脚本" class="headerlink" title="1. 翻译脚本"></a>1. 翻译脚本</h2><p>用于在编辑字符串时快速的对输入文案做翻译，这里用到了Javascript脚本语言。</p>
+<p><strong>1</strong> 在JS中添加一个翻译方法：</p>
+<pre><code>// s 需要翻译的内容
+// t 需要翻译到的语言
+// v 用来校验的返回参数
+function translate(s,t,v)
+</code></pre>
+<p>在点击翻译按钮时，Fella内部会调用JS中的<code>translate</code>方法，JS内可以根据自己的习惯或者用到的开放API执行翻译。</p>
+<p><strong>2</strong> 请求Fella翻译接口，调用方法如：</p>
+<pre><code>Fella.request(u,p,m,h,v,c)
+</code></pre>
+<p><strong>3</strong> 通过callback回传请求结果，内容包含发起请求时的各种参数，格式如下:</p>
+<pre><code>&#123;
+    &quot;method&quot;: xxx,
+    &quot;verification&quot;:,
+    &quot;params&quot;: xxx,
+    &quot;headers&quot;: xxx,
+    &quot;success&quot;: xxx,
+    &quot;error&quot;: xxx
+&#125;
+</code></pre>
+<p><strong>4</strong> 在JS脚本中接收到请求结果并解析后，将解析内容返回给Fella：</p>
+<pre><code>/// 回调结果方法
+/// - Parameters:
+///   - result: 翻译结果
+///   - language: 语言
+///   - verification: 校验内容
+func translateResult(_ result: String, _ language: String, _ verification: Any)
+</code></pre>
+<p><strong>5</strong> 这里是一个我使用**<a target="_blank" rel="noopener" href="https://fanyi-api.baidu.com/product/153">百度翻译开放API</a>**实现的例子：</p>
+<pre><code>var MD5 = function (string) // 百度SDK里提供的MD5算法
+
+function translate(s,t,v) &#123;
+    Fella.showLog(&quot;begin request&quot;);
+
+    var appid = &#39;你申请的appid&#39;;
+    var key = &#39;你申请的key&#39;;
+    var salt = (new Date).getTime();
+    var query = s;
+    var sign = MD5(appid + query + salt +key);
+    
+    Fella.request(&#39;https://fanyi-api.baidu.com/api/trans/vip/translate&#39;,
+                &#123;
+                    q: query,
+                    appid: appid,
+                    salt: salt,
+                    from: &quot;auto&quot;,
+                    to: t,
+                    sign: sign
+                &#125;,
+                &quot;get&quot;,
+                null,
+                v,
+                &quot;parse&quot;)
+&#125;
+
+function parse(res) &#123;
+    var r = res[&quot;success&quot;][&quot;trans_result&quot;][0][&quot;dst&quot;]
+    var l = res[&quot;params&quot;][&quot;to&quot;]
+    var v = res[&quot;verification&quot;]
+    Fella.showLog(res)
+    Fella.translateResult(r, l, v)
+&#125;
+</code></pre>
+<h2 id="2-内容导入JS"><a href="#2-内容导入JS" class="headerlink" title="2. 内容导入JS"></a>2. 内容导入JS</h2><p>使用Javascript脚本语言提供给使用者自定义导入本地化资源的方式。</p>
+<p><strong>1.</strong> 在JS中添加一个方法，由Fella调用：</p>
+<pre><code>function importI18ns()
+</code></pre>
+<p><strong>2.</strong> Fella中提供了额外的以下几个方法：</p>
+<pre><code>/// 更新本地化内容
+/// - Parameters:
+///   - i18nJson: 本地化内容的json内容
+///   - fileName: 文件名的相对路径，在Fella中切换文件的地方显示在文件名后
+func update(_ i18nJson: [String: Any], _ fileName: String)
+    
+/// 获取本地i18nString内容
+/// - Parameters:
+///   - identifier: 字符串标识
+///   - fileName: 文件名的相对路径，在Fella中切换文件的地方显示在文件名后
+///   - callback: 回调方法
+func i18nString(_ identifier: String, _ fileName: String, _ callback: String)
+    
+/// 刷新字符串列表，在所有数据遍历结束后调用
+func reloadI18nList()
+</code></pre>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/Fella/0x08_fella_preferences/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          0x08 Preferences
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Fella/0x06_fella_shortcuts/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">0x06 Fella 快捷键</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=0x07 简单脚本交互 - Jo's Apps&url=http://example.com/Fella/0x07_fella_scripts/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=0x07 简单脚本交互 - Jo's Apps&u=http://example.com/Fella/0x07_fella_scripts/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=0x07 简单脚本交互 - Jo's Apps&url=http://example.com/Fella/0x07_fella_scripts/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+             
+            <aside class="sidebar">
+            
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Diagram/">Diagram</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Fella/">Fella</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Instruction/" rel="tag">Instruction</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%90%E7%A7%81%E5%A3%B0%E6%98%8E/" rel="tag">隐私声明</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/Diagram/0x00_diagram_privacy/">绕线画-隐私声明</a>
+          </li>
+        
+          <li>
+            <a href="/Fella/0x08_fella_preferences/">0x08 Preferences</a>
+          </li>
+        
+          <li>
+            <a href="/Fella/0x07_fella_scripts/">0x07 简单脚本交互</a>
+          </li>
+        
+          <li>
+            <a href="/Fella/0x06_fella_shortcuts/">0x06 Fella 快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/Fella/0x05_fella_editor/">0x05 Fella内容编辑区</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">2021</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            Jo&#39;s Apps &copy; 2023<br>
+            Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1618369575286.js"></script>
+
+
+<script src="/dist/custom.js?1618369575286.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
